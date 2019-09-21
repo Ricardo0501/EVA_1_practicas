@@ -1,0 +1,280 @@
+ricardo@ricardo-ThinkPad-T440:~$ start service mysql
+
+Orden «start» no encontrada. Quizá quiso decir:
+
+  la orden «smart» del paquete deb «smartpm-core»
+  la orden «kstart» del paquete deb «kde-runtime»
+  la orden «stat» del paquete deb «coreutils»
+  la orden «startx» del paquete deb «xinit»
+  la orden «rstart» del paquete deb «x11-session-utils»
+  la orden «tart» del paquete deb «tart»
+
+Pruebe con: sudo apt install <nombre del paquete deb>
+
+ricardo@ricardo-ThinkPad-T440:~$ sudo star service mysql
+[sudo] contraseña para ricardo:            
+Lo sentimos, vuelva a intentarlo.
+[sudo] contraseña para ricardo:     
+sudo: star: orden no encontrada
+ricardo@ricardo-ThinkPad-T440:~$ sudo mysql -u root -p
+Enter password: 
+ERROR 1045 (28000): Access denied for user 'root'@'localhost' (using password: YES)
+ricardo@ricardo-ThinkPad-T440:~$ sudo mysql -u root -p
+Enter password: 
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 3
+Server version: 5.7.27-0ubuntu0.18.04.1 (Ubuntu)
+
+Copyright (c) 2000, 2019, Oracle and/or its affiliates. All rights reserved.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
+| phpmyadmin         |
+| sys                |
++--------------------+
+5 rows in set (0.00 sec)
+
+mysql> create database  prueba;
+Query OK, 1 row affected (0.00 sec)
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
+| phpmyadmin         |
+| prueba             |
+| sys                |
++--------------------+
+6 rows in set (0.00 sec)
+
+mysql> use prueba;
+Database changed
+mysql> show tables;
+Empty set (0.00 sec)
+
+mysql> show create database prueba;
++----------+-------------------------------------------------------------------+
+| Database | Create Database                                                   |
++----------+-------------------------------------------------------------------+
+| prueba   | CREATE DATABASE `prueba` /*!40100 DEFAULT CHARACTER SET latin1 */ |
++----------+-------------------------------------------------------------------+
+1 row in set (0.00 sec)
+
+mysql> show character set;
++----------+---------------------------------+---------------------+--------+
+| Charset  | Description                     | Default collation   | Maxlen |
++----------+---------------------------------+---------------------+--------+
+| big5     | Big5 Traditional Chinese        | big5_chinese_ci     |      2 |
+| dec8     | DEC West European               | dec8_swedish_ci     |      1 |
+| cp850    | DOS West European               | cp850_general_ci    |      1 |
+| hp8      | HP West European                | hp8_english_ci      |      1 |
+| koi8r    | KOI8-R Relcom Russian           | koi8r_general_ci    |      1 |
+| latin1   | cp1252 West European            | latin1_swedish_ci   |      1 |
+| latin2   | ISO 8859-2 Central European     | latin2_general_ci   |      1 |
+| swe7     | 7bit Swedish                    | swe7_swedish_ci     |      1 |
+| ascii    | US ASCII                        | ascii_general_ci    |      1 |
+| ujis     | EUC-JP Japanese                 | ujis_japanese_ci    |      3 |
+| sjis     | Shift-JIS Japanese              | sjis_japanese_ci    |      2 |
+| hebrew   | ISO 8859-8 Hebrew               | hebrew_general_ci   |      1 |
+| tis620   | TIS620 Thai                     | tis620_thai_ci      |      1 |
+| euckr    | EUC-KR Korean                   | euckr_korean_ci     |      2 |
+| koi8u    | KOI8-U Ukrainian                | koi8u_general_ci    |      1 |
+| gb2312   | GB2312 Simplified Chinese       | gb2312_chinese_ci   |      2 |
+| greek    | ISO 8859-7 Greek                | greek_general_ci    |      1 |
+| cp1250   | Windows Central European        | cp1250_general_ci   |      1 |
+| gbk      | GBK Simplified Chinese          | gbk_chinese_ci      |      2 |
+| latin5   | ISO 8859-9 Turkish              | latin5_turkish_ci   |      1 |
+| armscii8 | ARMSCII-8 Armenian              | armscii8_general_ci |      1 |
+| utf8     | UTF-8 Unicode                   | utf8_general_ci     |      3 |
+| ucs2     | UCS-2 Unicode                   | ucs2_general_ci     |      2 |
+| cp866    | DOS Russian                     | cp866_general_ci    |      1 |
+| keybcs2  | DOS Kamenicky Czech-Slovak      | keybcs2_general_ci  |      1 |
+| macce    | Mac Central European            | macce_general_ci    |      1 |
+| macroman | Mac West European               | macroman_general_ci |      1 |
+| cp852    | DOS Central European            | cp852_general_ci    |      1 |
+| latin7   | ISO 8859-13 Baltic              | latin7_general_ci   |      1 |
+| utf8mb4  | UTF-8 Unicode                   | utf8mb4_general_ci  |      4 |
+| cp1251   | Windows Cyrillic                | cp1251_general_ci   |      1 |
+| utf16    | UTF-16 Unicode                  | utf16_general_ci    |      4 |
+| utf16le  | UTF-16LE Unicode                | utf16le_general_ci  |      4 |
+| cp1256   | Windows Arabic                  | cp1256_general_ci   |      1 |
+| cp1257   | Windows Baltic                  | cp1257_general_ci   |      1 |
+| utf32    | UTF-32 Unicode                  | utf32_general_ci    |      4 |
+| binary   | Binary pseudo charset           | binary              |      1 |
+| geostd8  | GEOSTD8 Georgian                | geostd8_general_ci  |      1 |
+| cp932    | SJIS for Windows Japanese       | cp932_japanese_ci   |      2 |
+| eucjpms  | UJIS for Windows Japanese       | eucjpms_japanese_ci |      3 |
+| gb18030  | China National Standard GB18030 | gb18030_chinese_ci  |      4 |
++----------+---------------------------------+---------------------+--------+
+41 rows in set (0.00 sec)
+
+mysql> show collation wher charset='utf8';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'wher charset='utf8'' at line 1
+mysql> show collation where charset='utf8';
++--------------------------+---------+-----+---------+----------+---------+
+| Collation                | Charset | Id  | Default | Compiled | Sortlen |
++--------------------------+---------+-----+---------+----------+---------+
+| utf8_general_ci          | utf8    |  33 | Yes     | Yes      |       1 |
+| utf8_bin                 | utf8    |  83 |         | Yes      |       1 |
+| utf8_unicode_ci          | utf8    | 192 |         | Yes      |       8 |
+| utf8_icelandic_ci        | utf8    | 193 |         | Yes      |       8 |
+| utf8_latvian_ci          | utf8    | 194 |         | Yes      |       8 |
+| utf8_romanian_ci         | utf8    | 195 |         | Yes      |       8 |
+| utf8_slovenian_ci        | utf8    | 196 |         | Yes      |       8 |
+| utf8_polish_ci           | utf8    | 197 |         | Yes      |       8 |
+| utf8_estonian_ci         | utf8    | 198 |         | Yes      |       8 |
+| utf8_spanish_ci          | utf8    | 199 |         | Yes      |       8 |
+| utf8_swedish_ci          | utf8    | 200 |         | Yes      |       8 |
+| utf8_turkish_ci          | utf8    | 201 |         | Yes      |       8 |
+| utf8_czech_ci            | utf8    | 202 |         | Yes      |       8 |
+| utf8_danish_ci           | utf8    | 203 |         | Yes      |       8 |
+| utf8_lithuanian_ci       | utf8    | 204 |         | Yes      |       8 |
+| utf8_slovak_ci           | utf8    | 205 |         | Yes      |       8 |
+| utf8_spanish2_ci         | utf8    | 206 |         | Yes      |       8 |
+| utf8_roman_ci            | utf8    | 207 |         | Yes      |       8 |
+| utf8_persian_ci          | utf8    | 208 |         | Yes      |       8 |
+| utf8_esperanto_ci        | utf8    | 209 |         | Yes      |       8 |
+| utf8_hungarian_ci        | utf8    | 210 |         | Yes      |       8 |
+| utf8_sinhala_ci          | utf8    | 211 |         | Yes      |       8 |
+| utf8_german2_ci          | utf8    | 212 |         | Yes      |       8 |
+| utf8_croatian_ci         | utf8    | 213 |         | Yes      |       8 |
+| utf8_unicode_520_ci      | utf8    | 214 |         | Yes      |       8 |
+| utf8_vietnamese_ci       | utf8    | 215 |         | Yes      |       8 |
+| utf8_general_mysql500_ci | utf8    | 223 |         | Yes      |       1 |
++--------------------------+---------+-----+---------+----------+---------+
+27 rows in set (0.00 sec)
+
+mysql> show collation where chaset='ujis'
+    -> ;
+ERROR 1054 (42S22): Unknown column 'chaset' in 'where clause'
+mysql> show collation where charset='ujis';
++------------------+---------+----+---------+----------+---------+
+| Collation        | Charset | Id | Default | Compiled | Sortlen |
++------------------+---------+----+---------+----------+---------+
+| ujis_japanese_ci | ujis    | 12 | Yes     | Yes      |       1 |
+| ujis_bin         | ujis    | 91 |         | Yes      |       1 |
++------------------+---------+----+---------+----------+---------+
+2 rows in set (0.00 sec)
+
+mysql> create table prueba(nombre varchar(20));
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> show create table prueba;
++--------+----------------------------------------------------------------------------------------------------+
+| Table  | Create Table                                                                                       |
++--------+----------------------------------------------------------------------------------------------------+
+| prueba | CREATE TABLE `prueba` (
+  `nombre` varchar(20) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 |
++--------+----------------------------------------------------------------------------------------------------+
+1 row in set (0.01 sec)
+
+mysql> create table prueba_ram(nombre varchar(50));
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> drop table prueba_ram;
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> create table prueba_ram(nombre varchar(50)) engine=memory;
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> show create table prueba_ram;
++------------+--------------------------------------------------------------------------------------------------------+
+| Table      | Create Table                                                                                           |
++------------+--------------------------------------------------------------------------------------------------------+
+| prueba_ram | CREATE TABLE `prueba_ram` (
+  `nombre` varchar(50) DEFAULT NULL
+) ENGINE=MEMORY DEFAULT CHARSET=latin1 |
++------------+--------------------------------------------------------------------------------------------------------+
+1 row in set (0.00 sec)
+
+mysql> insert into prueba
+    -> values('Ricardo');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into prueba_ram 
+    -> values('ricardo');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select* from prueba;
++---------+
+| nombre  |
++---------+
+| Ricardo |
++---------+
+1 row in set (0.00 sec)
+
+mysql> select* from pureba_ram;
+ERROR 1146 (42S02): Table 'prueba.pureba_ram' doesn't exist
+mysql> select * from prueba_ram;
++---------+
+| nombre  |
++---------+
+| ricardo |
++---------+
+1 row in set (0.00 sec)
+
+mysql> restar;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'restar' at line 1
+mysql> restart;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'restart' at line 1
+mysql> service mysqld restart;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'service mysqld restart' at line 1
+mysql> restart
+    -> ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'restart' at line 1
+mysql> mysql restart;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'mysql restart' at line 1
+mysql> show tables;
++------------------+
+| Tables_in_prueba |
++------------------+
+| prueba           |
+| prueba_ram       |
++------------------+
+2 rows in set (0.01 sec)
+
+mysql> drop tables;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 1
+mysql> drop table prueba;
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> drop table prueba_ram;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> show tables;
+Empty set (0.00 sec)
+
+mysql> drop database prueba;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
+| phpmyadmin         |
+| sys                |
++--------------------+
+5 rows in set (0.00 sec)
+
+mysql> /etc/init.d/mysqld start;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '/etc/init.d/mysqld start' at line 1
+mysql> 
+

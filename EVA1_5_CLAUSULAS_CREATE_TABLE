@@ -1,0 +1,244 @@
+ricardo@ricardo-ThinkPad-T440:~$ sudo mysql -u root -p
+[sudo] contraseña para ricardo:     
+Enter password: 
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 2
+Server version: 5.7.27-0ubuntu0.18.04.1 (Ubuntu)
+
+Copyright (c) 2000, 2019, Oracle and/or its affiliates. All rights reserved.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| copia_eva_1        |
+| eva_1              |
+| mysql              |
+| performance_schema |
+| phpmyadmin         |
+| prueba             |
+| sys                |
++--------------------+
+8 rows in set (0.01 sec)
+
+mysql> use eva_1;
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+Database changed
+mysql> select*from prueba;
++-----------+
+| nombre    |
++-----------+
+| MÜller    |
+| MX System |
+| MUffler   |
+| MySQL     |
++-----------+
+4 rows in set (0.00 sec)
+
+mysql> clear;
+mysql> exit;
+Bye
+ricardo@ricardo-ThinkPad-T440:~$ sudo services mysql start
+[sudo] contraseña para ricardo:     
+sudo: services: orden no encontrada
+ricardo@ricardo-ThinkPad-T440:~$ service mysql start
+ricardo@ricardo-ThinkPad-T440:~$ mysql -u root -p
+Enter password: 
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 35
+Server version: 5.7.27-0ubuntu0.18.04.1 (Ubuntu)
+
+Copyright (c) 2000, 2019, Oracle and/or its affiliates. All rights reserved.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> desc paises;
+ERROR 1046 (3D000): No database selected
+mysql> use database copia_eva_1;
+ERROR 1049 (42000): Unknown database 'database'
+mysql> use copia_eva_1;
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+Database changed
+mysql> desc paises;
+ERROR 1146 (42S02): Table 'copia_eva_1.paises' doesn't exist
+mysql> use eva_1;
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+Database changed
+mysql> create table country(name varchar(50) default 'México', population int  default 1);
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> desc paises;
++-----------+-------------+------+-----+---------+-------+
+| Field     | Type        | Null | Key | Default | Extra |
++-----------+-------------+------+-----+---------+-------+
+| nombre    | varchar(50) | YES  |     | NULL    |       |
+| poblacion | int(11)     | YES  |     | NULL    |       |
+| idioma    | varchar(20) | YES  |     | NULL    |       |
+| codigo    | int(11)     | YES  |     | NULL    |       |
+| fecha_ind | date        | YES  |     | NULL    |       |
++-----------+-------------+------+-----+---------+-------+
+5 rows in set (0.00 sec)
+
+mysql> desc country;
++------------+-------------+------+-----+---------+-------+
+| Field      | Type        | Null | Key | Default | Extra |
++------------+-------------+------+-----+---------+-------+
+| name       | varchar(50) | YES  |     | México  |       |
+| population | int(11)     | YES  |     | 1       |       |
++------------+-------------+------+-----+---------+-------+
+2 rows in set (0.00 sec)
+
+mysql> select*from paises;
++--------+-----------+--------+--------+-----------+
+| nombre | poblacion | idioma | codigo | fecha_ind |
++--------+-----------+--------+--------+-----------+
+| NULL   |      NULL | NULL   |   NULL | NULL      |
++--------+-----------+--------+--------+-----------+
+1 row in set (0.00 sec)
+
+mysql> insert into country
+    -> values();
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select*from country;
++---------+------------+
+| name    | population |
++---------+------------+
+| México  |          1 |
++---------+------------+
+1 row in set (0.00 sec)
+
+mysql> insert into country
+    -> name values ('Camargo');
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'name values ('Camargo')' at line 2
+mysql> insert into country name value ('Camargo');
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'name value ('Camargo')' at line 1
+mysql> insert into country( name) values ('Camargo');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select*from country;
++---------+------------+
+| name    | population |
++---------+------------+
+| México  |          1 |
+| Camargo |          1 |
++---------+------------+
+2 rows in set (0.00 sec)
+
+mysql> inser into country (name) values('Camargo');
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'inser into country (name) values('Camargo')' at line 1
+mysql> insert into country (name) values('Camargo');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select*from country;
++---------+------------+
+| name    | population |
++---------+------------+
+| México  |          1 |
+| Camargo |          1 |
+| Camargo |          1 |
++---------+------------+
+3 rows in set (0.00 sec)
+
+mysql> create table materias(nombre varchar(50) default 'TDB' UNIQUE 
+    -> , creditos int default 5);
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> insert into materias(nombre) values('POO'),('Cálculo'),('EDD');
+Query OK, 3 rows affected (0.00 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+mysql> select*from materias;
++----------+----------+
+| nombre   | creditos |
++----------+----------+
+| POO      |        5 |
+| Cálculo  |        5 |
+| EDD      |        5 |
++----------+----------+
+3 rows in set (0.00 sec)
+
+mysql> insert into materias (nombre) values('POO');
+ERROR 1062 (23000): Duplicate entry 'POO' for key 'nombre'
+mysql> select*from materias;
++----------+----------+
+| nombre   | creditos |
++----------+----------+
+| POO      |        5 |
+| Cálculo  |        5 |
+| EDD      |        5 |
++----------+----------+
+3 rows in set (0.00 sec)
+
+mysql> insert into materias values('FBD',10);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select*from materias;
++----------+----------+
+| nombre   | creditos |
++----------+----------+
+| POO      |        5 |
+| Cálculo  |        5 |
+| EDD      |        5 |
+| FBD      |       10 |
++----------+----------+
+4 rows in set (0.00 sec)
+
+mysql> insert into materias values(null,null);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select*from materias;
++----------+----------+
+| nombre   | creditos |
++----------+----------+
+| POO      |        5 |
+| Cálculo  |        5 |
+| EDD      |        5 |
+| FBD      |       10 |
+| NULL     |     NULL |
++----------+----------+
+5 rows in set (0.00 sec)
+
+mysql> create table carreras(nombre varchar(50) unique not null default);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ')' at line 1
+mysql> create table carreras(nombre varchar(50) unique not null);
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> insert into carreras values(null);
+ERROR 1048 (23000): Column 'nombre' cannot be null
+mysql> insert into carreras values();
+ERROR 1364 (HY000): Field 'nombre' doesn't have a default value
+mysql> insert into carreras values('INFORMATICA');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select*from materias;
++----------+----------+
+| nombre   | creditos |
++----------+----------+
+| POO      |        5 |
+| Cálculo  |        5 |
+| EDD      |        5 |
+| FBD      |       10 |
+| NULL     |     NULL |
++----------+----------+
+5 rows in set (0.00 sec)
+
+mysql> 
+
